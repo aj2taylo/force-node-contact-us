@@ -41,9 +41,6 @@ app.post('/form', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
-      res.writeHead(200, {'content-type': 'text/plain'});
-      res.write('Received form:\n\n');
-      res.end(util.inspect(fields));
 
 
       if (req.query.code !== undefined) {
@@ -75,6 +72,10 @@ app.post('/form', function(req, res) {
       } else {
         res.redirect(org.getAuthUri());
       }
+      res.writeHead(200, {'content-type': 'text/plain'});
+      res.write('Received form:\n\n');
+      res.end(util.inspect(fields));
+
     });
 
 
