@@ -35,8 +35,12 @@ app.get('/', function(req, res) {
         if (!err) {
           org.query({ query: 'SELECT id, name, type, industry FROM Account' }, function(err, results) {
             if (!err) {
-              var body = {"firstName" : "test",  "lastName" : "test2",  "email" : "test2@test.com",  "company" : "co",  "description" : "desc",  "type" : "test"};
-              org.apex.post("/contactUs/", body, function(res) {
+              var body = {
+                "uri" : "/contactUs/",
+                "method" : "post", 
+                "body" : {"firstName" : "test",  "lastName" : "test2",  "email" : "test2@test.com",  "company" : "co",  "description" : "desc",  "type" : "test" }
+              };
+              org.apexRest("/contactUs/", body, function(res) {
                 console.log(res);
               });
 
