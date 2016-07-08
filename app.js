@@ -50,16 +50,14 @@ app.post('/form', function(req, res) {
       //res.writeHead(200, {'content-type': 'text/plain'});
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
-      console.log('**************************POST*******************');
-      console.log(oauthCode);
-      console.log('**************************POST*******************');
-      
+
+      var bodyContent   = { "firstName" : fields.firstName, "lastName" : fields.lastName, "email": fields.email, "company" : fields.company, "description" : fields.description , "type": fields.type };
         org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           console.log('**************************ERR???*******************');
           console.log(err);
           console.log('**************************ERR???*******************');
           if (!err) {
-            org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
+            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContent }, function(err, result) {
               console.log('**************************apexRest*******************');
               console.log(err);
               console.log(result);
