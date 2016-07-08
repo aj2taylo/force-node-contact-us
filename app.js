@@ -16,7 +16,7 @@ if (isSetup()) {
   var org = nforce.createConnection({
     clientId: process.env.CONSUMER_KEY,
     clientSecret: process.env.CONSUMER_SECRET,
-    redirectUri: oauthCallbackUrl(req),
+    redirectUri: process.env.CALLBACK_URL, //oauthCallbackUrl(req),
     mode: 'single'
   });
 }
