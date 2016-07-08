@@ -2,6 +2,9 @@ var express = require('express');
 var path = require('path');
 var nforce = require('nforce');
 var hbs = require('hbs');
+var formidable = require('formidable'),
+    http = require('http'),
+    util = require('util');
 
 var app = express();
 
@@ -19,6 +22,22 @@ function oauthCallbackUrl(req) {
 hbs.registerHelper('get', function(field) {
   return this.get(field);
 });
+
+/*app.post('/form', function(req, res)) {
+
+    // Parse a form
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function(err, fields, files) {
+      res.writeHead(200, {'content-type': 'text/plain'});
+      res.write('Received form:\n\n');
+      res.end(util.inspect(fields));
+    });
+
+    return;
+  }
+
+}*/
 
 app.get('/', function(req, res) {
   if (isSetup()) {
