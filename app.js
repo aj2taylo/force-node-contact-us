@@ -42,18 +42,19 @@ app.post('/form', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
-      //res.writeHead(200, {'content-type': 'text/plain'});
+      res.writeHead(200, {'content-type': 'text/plain'});
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
-
-
+      res.end(util.inspect(req));
+      
+      /*
       if (req.query.code !== undefined) {
         console.log('req is');
         console.log(req);
         // authenticated
         org.authenticate(req.query, function(err) {
           res.end(err);
-          /*if (!err) {
+          if (!err) {
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
               if(!err) {
                 console.log(resp);
@@ -72,11 +73,10 @@ app.post('/form', function(req, res) {
               res.send(err.message);
             }
           }
-          */
         });
       } else {
         res.redirect(org.getAuthUri());
-      }
+      }*/
     });
 
 
