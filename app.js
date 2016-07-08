@@ -36,7 +36,7 @@ app.get('/', function(req, res) {
           org.query({ query: 'SELECT id, name, type, industry FROM Account' }, function(err, results) {
             if (!err) {
               var body = {"firstName" : "test",  "lastName" : "test2",  "email" : "test2@test.com",  "company" : "co",  "description" : "desc",  "type" : "test"};
-              conn.apex.post("/contactUs/", body, function(res) {
+              org.apex.post("/contactUs/", body, function(res) {
                 console.log(res);
               });
 
