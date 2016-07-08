@@ -11,6 +11,17 @@ var app = express();
 app.set('view engine', 'hbs');
 app.enable('trust proxy');
 
+var org;
+if (isSetup()) {
+  var org = nforce.createConnection({
+    clientId: process.env.CONSUMER_KEY,
+    clientSecret: process.env.CONSUMER_SECRET,
+    redirectUri: oauthCallbackUrl(req),
+    mode: 'single'
+  });
+}
+
+
 function isSetup() {
   return (process.env.CONSUMER_KEY != null) && (process.env.CONSUMER_SECRET != null);
 }
@@ -34,15 +45,8 @@ app.post('/form', function(req, res) {
       res.write('Received form:\n\n');
       res.end(util.inspect(fields));
 
-      /*var org = nforce.createConnection({
-        clientId: process.env.CONSUMER_KEY,
-        clientSecret: process.env.CONSUMER_SECRET,
-        redirectUri: oauthCallbackUrl(req),
-        mode: 'single'
-      });
-      */
 
-      /*if (req.query.code !== undefined) {
+      if (req.query.code !== undefined) {
         console.log('req is');
         console.log(req);
         // authenticated
@@ -70,7 +74,7 @@ app.post('/form', function(req, res) {
         });
       } else {
         res.redirect(org.getAuthUri());
-      }*/
+      }
     });
 
 
@@ -83,12 +87,12 @@ app.post('/form', function(req, res) {
 
 app.get('/', function(req, res) {
   if (isSetup()) {
-    var org = nforce.createConnection({
+    /*var org = nforce.createConnection({
       clientId: process.env.CONSUMER_KEY,
       clientSecret: process.env.CONSUMER_SECRET,
       redirectUri: oauthCallbackUrl(req),
       mode: 'single'
-    });
+    });*/
 
     if (req.query.code !== undefined) {
       console.log('req is');
