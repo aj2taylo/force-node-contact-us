@@ -31,14 +31,16 @@ app.post('/form', function(req, res) {
 
     form.parse(req, function(err, fields, files) {
       res.writeHead(200, {'content-type': 'text/plain'});
+      res.write('Received form:\n\n');
+      res.end(util.inspect(fields));
 
-      var org = nforce.createConnection({
+      /*var org = nforce.createConnection({
         clientId: process.env.CONSUMER_KEY,
         clientSecret: process.env.CONSUMER_SECRET,
         redirectUri: oauthCallbackUrl(req),
         mode: 'single'
       });
-
+      */
 
       /*if (req.query.code !== undefined) {
         console.log('req is');
@@ -71,8 +73,6 @@ app.post('/form', function(req, res) {
       }*/
     });
 
-    //res.write('Received form:\n\n');
-    //res.end(util.inspect(fields));
 
 
     return;
