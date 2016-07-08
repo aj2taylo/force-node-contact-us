@@ -24,7 +24,7 @@ hbs.registerHelper('get', function(field) {
 });
 
 
-/*
+
 app.post('/form', function(req, res) {
     // Parse a form
     var form = new formidable.IncomingForm();
@@ -46,7 +46,6 @@ app.post('/form', function(req, res) {
         // authenticated
         org.authenticate(req.query, function(err) {
           if (!err) {
-
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
               if(!err) {
                 console.log(resp);
@@ -79,7 +78,6 @@ app.post('/form', function(req, res) {
     return;
 
 });
-*/
 
 
 
