@@ -24,7 +24,6 @@ hbs.registerHelper('get', function(field) {
 });
 
 app.post('/form', function(req, res)) {
-
     // Parse a form
     var form = new formidable.IncomingForm();
 
@@ -35,9 +34,7 @@ app.post('/form', function(req, res)) {
     });
 
     return;
-  }
-
-}
+});
 
 
 
