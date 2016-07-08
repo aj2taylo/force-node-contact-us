@@ -54,9 +54,7 @@ app.post('/form', function(req, res) {
       console.log(oauthCode);
       console.log('**************************POST*******************');
       
-      if (oauthCode !== undefined) {
-        // authenticated
-        org.authenticate(oauthCode, function(err) {
+        org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           console.log('**************************ERR???*******************');
           console.log(err);
           console.log('**************************ERR???*******************');
@@ -84,9 +82,6 @@ app.post('/form', function(req, res) {
             }
           }
         });
-      } else {
-        res.redirect(org.getAuthUri());
-      }
     });
 
 
