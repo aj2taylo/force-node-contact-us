@@ -42,7 +42,7 @@ app.post('/form', function(req, res) {
 
       if (req.query.code !== undefined) {
         console.log('req is');
-        consoel.log(req);
+        console.log(req);
         // authenticated
         org.authenticate(req.query, function(err) {
           if (!err) {
@@ -94,7 +94,7 @@ app.get('/', function(req, res) {
 
     if (req.query.code !== undefined) {
       console.log('req is');
-      consoel.log(req);
+      console.log(req);
       // authenticated
       org.authenticate(req.query, function(err) {
         if (!err) {
