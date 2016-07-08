@@ -40,7 +40,7 @@ app.post('/form', function(req, res) {
       });
 
 
-      if (req.query.code !== undefined) {
+      /*if (req.query.code !== undefined) {
         console.log('req is');
         console.log(req);
         // authenticated
@@ -68,7 +68,7 @@ app.post('/form', function(req, res) {
         });
       } else {
         res.redirect(org.getAuthUri());
-      }
+      }*/
     });
 
     //res.write('Received form:\n\n');
