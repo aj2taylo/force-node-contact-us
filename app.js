@@ -57,6 +57,9 @@ app.post('/form', function(req, res) {
           console.log(err);
           console.log('**************************ERR???*******************');
           if (!err) {
+              console.log('**************************bodyContent*******************');
+              console.log(bodyContent);
+              console.log('**************************bodyContent*******************');
             org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContent }, function(err, result) {
               console.log('**************************apexRest*******************');
               console.log(err);
