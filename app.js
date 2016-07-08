@@ -51,7 +51,7 @@ app.post('/form', function(req, res) {
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
       console.log('**************************POST*******************');
-      console.log(oauthCode.code);
+      console.log(oauthCode);
       console.log('**************************POST*******************');
       
       if (oauthCode !== undefined) {
