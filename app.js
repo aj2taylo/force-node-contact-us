@@ -13,7 +13,7 @@ app.enable('trust proxy');
 
 var org;
 if (isSetup()) {
-  var org = nforce.createConnection({
+  org = nforce.createConnection({
     clientId: process.env.CONSUMER_KEY,
     clientSecret: process.env.CONSUMER_SECRET,
     redirectUri: process.env.CALLBACK_URL, //oauthCallbackUrl(req),
@@ -27,7 +27,8 @@ function isSetup() {
 }
 
 function oauthCallbackUrl(req) {
-  return req.protocol + '://' + req.get('host');
+  //return req.protocol + '://' + req.get('host');
+  return process.env.process.env.CALLBACK_URL;
 }
 
 hbs.registerHelper('get', function(field) {
@@ -51,7 +52,8 @@ app.post('/form', function(req, res) {
         console.log(req);
         // authenticated
         org.authenticate(req.query, function(err) {
-          if (!err) {
+          res.end(err);
+          /*if (!err) {
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
               if(!err) {
                 console.log(resp);
@@ -70,7 +72,7 @@ app.post('/form', function(req, res) {
               res.send(err.message);
             }
           }
-
+          */
         });
       } else {
         res.redirect(org.getAuthUri());
