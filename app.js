@@ -20,6 +20,7 @@ if (isSetup()) {
     mode: 'single'
   });
 }
+var oauthCode;
 
 
 function isSetup() {
@@ -38,6 +39,10 @@ hbs.registerHelper('get', function(field) {
 
 
 app.post('/form', function(req, res) {
+    console.log('************************************');
+    console.log('req is');
+    console.log(req.query.code);
+
     // Parse a form
     var form = new formidable.IncomingForm();
 
@@ -54,12 +59,12 @@ app.post('/form', function(req, res) {
         res.end('query.code 2');
 
       }
-      /*
-      if (req.query.code !== undefined) {
+      
+      if (oauthCode !== undefined) {
         console.log('req is');
         console.log(req);
         // authenticated
-        org.authenticate(req.query, function(err) {
+        org.authenticate(oauthCode, function(err) {
           res.end(err);
           if (!err) {
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
@@ -83,7 +88,7 @@ app.post('/form', function(req, res) {
         });
       } else {
         res.redirect(org.getAuthUri());
-      }*/
+      }
     });
 
 
@@ -108,7 +113,9 @@ app.get('/', function(req, res) {
       console.log('req is');
       console.log(req.query.code);
       // authenticated
-      org.authenticate(req.query, function(err) {
+
+      oauthCode     = req.query;
+      org.authenticate(oauthCode, function(err) {
         if (!err) {
           org.query({ query: 'SELECT id, name, type, industry FROM Account' }, function(err, results) {
             if (!err) {
