@@ -104,6 +104,7 @@ app.get('/', function(req, res) {
     });*/
 
     if (req.query.code !== undefined) {
+      console.log('************************************');
       console.log('req is');
       console.log(req);
       // authenticated
