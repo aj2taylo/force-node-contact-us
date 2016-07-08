@@ -37,12 +37,17 @@ app.post('/form', function(req, res) {
         mode: 'single'
       });
 
-      //org.apexRest({ uri: '/contactUs', method:'post', body: fields }, function(err, result) {
-      //  console.log(err);
-      //  console.log(res);
-      //});
-      res.write('Received form:\n\n');
-      res.end(util.inspect(fields));
+      org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
+        if(!err) {
+          console.log(resp);
+          res.send(resp);
+        }else{
+          console.log(err);
+          res.send(err);
+        }
+      });
+      //res.write('Received form:\n\n');
+      //res.end(util.inspect(fields));
 
     });
 
