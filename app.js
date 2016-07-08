@@ -47,21 +47,25 @@ app.post('/form', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
-      res.writeHead(200, {'content-type': 'text/plain'});
+      //res.writeHead(200, {'content-type': 'text/plain'});
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
       console.log('**************************POST*******************');
-      console.log(oauthCode);
+      console.log(oauthCode.code);
       console.log('**************************POST*******************');
       
       if (oauthCode !== undefined) {
-        console.log('req is');
-        console.log(req);
         // authenticated
         org.authenticate(oauthCode, function(err) {
+          console.log('**************************ERR???*******************');
           console.log(err);
+          console.log('**************************ERR???*******************');
           if (!err) {
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
+              console.log('**************************apexRest*******************');
+              console.log(err);
+              console.log(result);
+              console.log('**************************apexRest*******************');
               if(!err) {
                 console.log(resp);
                 res.send(resp);
