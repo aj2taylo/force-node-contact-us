@@ -50,22 +50,16 @@ app.post('/form', function(req, res) {
       res.writeHead(200, {'content-type': 'text/plain'});
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
-      res.write(util.inspect(req));
-      res.write(util.inspect(req.query));
-      res.write(util.inspect(req.query.code));
-      if (req.query.code !== undefined) {
-        res.end('query.code 1');
-      } else {
-        res.end('query.code 2');
-
-      }
+      console.log('**************************POST*******************');
+      console.log(oauthCode);
+      console.log('**************************POST*******************');
       
       if (oauthCode !== undefined) {
         console.log('req is');
         console.log(req);
         // authenticated
         org.authenticate(oauthCode, function(err) {
-          res.end(err);
+          console.log(err);
           if (!err) {
             org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
               if(!err) {
