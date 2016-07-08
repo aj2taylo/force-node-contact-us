@@ -37,20 +37,41 @@ app.post('/form', function(req, res) {
         mode: 'single'
       });
 
-      org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
-        if(!err) {
-          console.log(resp);
-          res.send(resp);
-        }else{
-          console.log(err);
-          res.send(err);
-        }
-      });
-      //res.write('Received form:\n\n');
-      //res.end(util.inspect(fields));
 
+      if (req.query.code !== undefined) {
+        console.log('req is');
+        consoel.log(req);
+        // authenticated
+        org.authenticate(req.query, function(err) {
+          if (!err) {
+
+            org.apexRest({ uri: 'contactUs', method:'POST', body: fields }, function(err, result) {
+              if(!err) {
+                console.log(resp);
+                res.send(resp);
+              }else{
+                console.log(err);
+                res.send(err);
+              }
+            });
+          }
+          else {
+            if (err.message.indexOf('invalid_grant') >= 0) {
+              res.redirect('/');
+            }
+            else {
+              res.send(err.message);
+            }
+          }
+
+        });
+      } else {
+        res.redirect(org.getAuthUri());
+      }
     });
 
+    //res.write('Received form:\n\n');
+    //res.end(util.inspect(fields));
 
 
     return;
@@ -70,6 +91,8 @@ app.get('/', function(req, res) {
     });
 
     if (req.query.code !== undefined) {
+      console.log('req is');
+      consoel.log(req);
       // authenticated
       org.authenticate(req.query, function(err) {
         if (!err) {
