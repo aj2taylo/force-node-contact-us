@@ -37,10 +37,10 @@ app.post('/form', function(req, res) {
         mode: 'single'
       });
 
-      org.apexRest({ uri: '/contactUs', method:'post', body: fields }, function(err, result) {
-        console.log(err);
-        console.log(res);
-      });
+      //org.apexRest({ uri: '/contactUs', method:'post', body: fields }, function(err, result) {
+      //  console.log(err);
+      //  console.log(res);
+      //});
       res.write('Received form:\n\n');
       res.end(util.inspect(fields));
 
