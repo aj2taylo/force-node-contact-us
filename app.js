@@ -45,8 +45,15 @@ app.post('/form', function(req, res) {
       res.writeHead(200, {'content-type': 'text/plain'});
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
-      res.end(util.inspect(req));
-      
+      res.write(util.inspect(req));
+      res.write(util.inspect(req.query));
+      res.write(util.inspect(req.query.code));
+      if (req.query.code !== undefined) {
+        res.end('query.code 1');
+      } else {
+        res.end('query.code 2');
+
+      }
       /*
       if (req.query.code !== undefined) {
         console.log('req is');
