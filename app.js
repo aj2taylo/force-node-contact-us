@@ -29,9 +29,24 @@ app.post('/form', function(req, res) {
 
     form.parse(req, function(err, fields, files) {
       res.writeHead(200, {'content-type': 'text/plain'});
+
+      var org = nforce.createConnection({
+        clientId: process.env.CONSUMER_KEY,
+        clientSecret: process.env.CONSUMER_SECRET,
+        redirectUri: oauthCallbackUrl(req),
+        mode: 'single'
+      });
+
+      org.apexRest({ uri: '/contactUs', method:'post', body: fields }, function(err, result) {
+        console.log(err);
+        console.log(res);
+      });
       res.write('Received form:\n\n');
       res.end(util.inspect(fields));
+
     });
+
+
 
     return;
 /**/
@@ -60,9 +75,7 @@ app.get('/', function(req, res) {
                 "method" : "post", 
                 "body" : {"firstName" : "test",  "lastName" : "test2",  "email" : "test2@test.com",  "company" : "co",  "description" : "desc",  "type" : "test" }
               };
-              /*org.apexRest("/contactUs/", body, function(res) {
-                console.log(res);
-              });*/
+
 
               res.render('index', {records: results.records});
             }
