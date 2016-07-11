@@ -57,10 +57,13 @@ app.post('/form', function(req, res) {
           console.log(err);
           console.log('**************************ERR???*******************');
           if (!err) {
+              console.log('**************************bodyContent*******************');
+              console.log(bodyContent);
+              console.log('**************************bodyContent*******************');
               console.log('**************************bodyContentA*******************');
               console.log(bodyContentA);
               console.log('**************************bodyContentA*******************');
-            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContentA }, function(err, result) {
+            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContent }, function(err, result) {
               console.log('**************************apexRest*******************');
               console.log(err);
               console.log(result);
