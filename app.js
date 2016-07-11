@@ -51,7 +51,7 @@ app.post('/form', function(req, res) {
       //res.write('Received form:\n\n');
       //res.end(util.inspect(fields));
       var bodyContentA  = util.inspect(fields);
-      var bodyContent   = '{ "firstName" : ' + fields.firstName + ', "lastName" :  ' + fields.lastName + ', "email":  ' + fields.email + ', "company" :  ' + fields.company + ', "description" :  ' + fields.description + ' , "type":  ' + fields.type + ' }';
+      var bodyContent   = '{ "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  "' + fields.type + '" }';
         org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           console.log('**************************ERR???*******************');
           console.log(err);
