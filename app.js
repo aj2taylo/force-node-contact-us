@@ -70,7 +70,7 @@ app.post('/form', function(req, res) {
               console.log('**************************apexRest*******************');
               if(!err) {
                 console.log(result);
-                res.send(result + "\n\nThank you, your request has been processed");
+                res.send("Thank you, your request has been processed");
               }else{
                 console.log(result);
                 res.send(result);
