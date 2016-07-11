@@ -13,12 +13,13 @@ app.enable('trust proxy');
 
 var org;
 if (isSetup()) {
-  org = nforce.createConnection({
-    clientId: process.env.CONSUMER_KEY,
-    clientSecret: process.env.CONSUMER_SECRET,
-    redirectUri: process.env.CALLBACK_URL, //oauthCallbackUrl(req),
-    mode: 'single'
-  });
+    org = nforce.createConnection({
+      clientId: process.env.CONSUMER_KEY,
+      clientSecret: process.env.CONSUMER_SECRET,
+      redirectUri: process.env.CALLBACK_URL, //oauthCallbackUrl(req),
+      mode: 'single'
+    });
+
 }
 var oauthCode;
 
@@ -97,7 +98,7 @@ app.post('/form', function(req, res) {
 
 
 app.get('/', function(req, res) {
-  if (isSetup()) {
+  //if (isSetup()) {
     /*var org = nforce.createConnection({
       clientId: process.env.CONSUMER_KEY,
       clientSecret: process.env.CONSUMER_SECRET,
@@ -105,48 +106,41 @@ app.get('/', function(req, res) {
       mode: 'single'
     });*/
 
-    if (req.query.code !== undefined) {
-      console.log('************************************');
-      console.log('req is');
-      console.log(req.query.code);
+    //if (req.query.code !== undefined) {
+      //console.log('************************************');
+      //console.log('req is');
+      //console.log(req.query.code);
       // authenticated
 
-      oauthCode     = req.query;
-      org.authenticate(oauthCode, function(err) {
-        if (!err) {
-          org.query({ query: 'SELECT id, name, type, industry FROM Account' }, function(err, results) {
-            if (!err) {
-              var body = {
-                "uri" : "/contactUs/",
-                "method" : "post", 
-                "body" : {"firstName" : "test",  "lastName" : "test2",  "email" : "test2@test.com",  "company" : "co",  "description" : "desc",  "type" : "test" }
-              };
-
-
-              res.render('index', {records: results.records});
-            }
-            else {
-              res.send(err.message);
-            }
-          });
-        }
-        else {
-          if (err.message.indexOf('invalid_grant') >= 0) {
+      //oauthCode     = req.query;
+      //org.authenticate(oauthCode, function(err) {
+        //if (!err) {
+          //org.query({ query: 'SELECT id, name, type, industry FROM Account' }, function(err, results) {
+            //if (!err) {
+              res.render('index'); //, {records: results.records});
+            //}
+            //else {
+            //  res.send(err.message);
+            //}
+          //});
+        //}
+        //else {
+          /*if (err.message.indexOf('invalid_grant') >= 0) {
             res.redirect('/');
           }
           else {
             res.send(err.message);
-          }
-        }
-      });
-    }
+          }*/
+        //}
+      //});
+    /*}
     else {
       res.redirect(org.getAuthUri());
-    }
-  }
-  else {
-    res.redirect('/setup');
-  }
+    }*/
+  //}
+  //else {
+  //  res.redirect('/setup');
+  //}
 });
 
 app.get('/setup', function(req, res) {
