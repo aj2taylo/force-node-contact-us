@@ -69,11 +69,11 @@ app.post('/form', function(req, res) {
               console.log(result);
               console.log('**************************apexRest*******************');
               if(!err) {
-                console.log(resp);
-                res.send(resp);
+                console.log(result);
+                res.send(result);
               }else{
-                console.log(err);
-                res.send(err);
+                console.log(result);
+                res.send(result);
               }
             });
           }
