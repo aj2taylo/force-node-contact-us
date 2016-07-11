@@ -71,6 +71,7 @@ app.post('/form', function(req, res) {
               if(!err) {
                 console.log(result);
                 res.send(result);
+                res.send("Thank you, your request has been processed");
               }else{
                 console.log(result);
                 res.send(result);
