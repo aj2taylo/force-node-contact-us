@@ -44,30 +44,10 @@ app.post('/form', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
-      //var bodyContent   = '{ "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  "' + fields.type + '" }';
-      var bodyContentJson = '{ "submission" : { "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  \"' + fields.type + '\" } }';
-
       var fieldsJson      = JSON.stringify(fields);
       var bodyContentObj  = new Object();
         bodyContentObj.submission   = fieldsJson;
       var bodyContent     = JSON.stringify(bodyContentObj);
-
-      console.log('*************************fieldsJson***********************');
-      console.log(fieldsJson);
-      console.log('*************************/fieldsJson***********************');
-
-      console.log('*************************bodyContentObj***********************');
-      console.log(bodyContentObj);
-      console.log('*************************/bodyContentObj***********************');
-
-      console.log('*************************bodyContent***********************');
-      console.log(bodyContent);
-      console.log('*************************/bodyContent***********************');
-
-      console.log('*************************bodyContentJson***********************');
-      console.log(bodyContentJson);
-      console.log('*************************/bodyContentJson***********************');
-
 
         org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           if (!err) {
