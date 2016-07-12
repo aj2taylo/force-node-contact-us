@@ -44,10 +44,34 @@ app.post('/form', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
-      var bodyContent   = '{ "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  "' + fields.type + '" }';
+      //var bodyContent   = '{ "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  "' + fields.type + '" }';
+      var bodyContentJson = '{ "submission" : { "firstName" : "' + fields.firstName + '", "lastName" :  "' + fields.lastName + '", "email":  "' + fields.email + '", "company" :  "' + fields.company + '", "description" :  "' + fields.description + '" , "type":  \"' + fields.type + '\" } }';
+
+      var fieldsJson      = JSON.stringify(fields);
+      var bodyContentObj  = new Object();
+        bodyContentObj.submission   = fieldsJson;
+      var bodyContent     = JSON.stringify(bodyContentOb);
+
+      console.log('*************************fieldsJson***********************');
+      console.log(fieldsJson);
+      console.log('*************************/fieldsJson***********************');
+
+      console.log('*************************bodyContentObj***********************');
+      console.log(bodyContentObj);
+      console.log('*************************/bodyContentObj***********************');
+
+      console.log('*************************bodyContent***********************');
+      console.log(bodyContent);
+      console.log('*************************/bodyContent***********************');
+
+      console.log('*************************bodyContentJson***********************');
+      console.log(bodyContentJson);
+      console.log('*************************/bodyContentJson***********************');
+
+
         org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           if (!err) {
-            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContent }, function(err, result) {
+            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContentJson }, function(err, result) {
               if(!err) {
                 res.send("Thank you, your request has been processed");
               }else{
