@@ -50,7 +50,7 @@ app.post('/form', function(req, res) {
       var fieldsJson      = JSON.stringify(fields);
       var bodyContentObj  = new Object();
         bodyContentObj.submission   = fieldsJson;
-      var bodyContent     = JSON.stringify(bodyContentOb);
+      var bodyContent     = JSON.stringify(bodyContentObj);
 
       console.log('*************************fieldsJson***********************');
       console.log(fieldsJson);
