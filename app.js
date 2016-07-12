@@ -71,7 +71,7 @@ app.post('/form', function(req, res) {
 
         org.authenticate({ username: process.env.SFUSER, password: process.env.SFPASS, securityToken: process.env.SFTOKEN}, function(err) {
           if (!err) {
-            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContentJson }, function(err, result) {
+            org.apexRest({ uri: 'contactUs', method:'POST', body: bodyContent }, function(err, result) {
               if(!err) {
                 res.send("Thank you, your request has been processed");
               }else{
@@ -80,6 +80,9 @@ app.post('/form', function(req, res) {
             });
           }
           else {
+            console.log('*************************err***********************');
+            console.log(err);
+            console.log('*************************/err***********************');
             if (err.message.indexOf('invalid_grant') >= 0) {
               res.redirect('/');
             }
